@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'OPA/css/style.css' %}">
     <title>We did it</title>
 </head>
 <body>
     What did we do?
     <br>
-    {{user.name}}<br>
-    {{user.age}}<br>
-    {{user}}
+    <form action='/process' method='POST'>
+        {% csrf_token %}
+        <input type="text" name='first'>
+        <input type="text" name='second'>
+        <input type="text" name='third'>
+        <input type="submit">
+
+    </form>
+    <br>
+    <div class='show_div'>
+        {{user.name}}
+        {{user.note}}
+        {{user.age}}
+    </div>
+    
 </body>
 </html>

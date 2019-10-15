@@ -1,0 +1,76 @@
+python manage.py shell
+
+
+>>> from apps.books_authors_app.models import *
+
+>>> Books.objects.create(title='C Sharp',desc='about C Sharp')
+
+>>> Books.objects.create(title='Java',desc='about Java')
+
+>>> Books.objects.create(title='Python',desc='about Python')
+
+>>> Books.objects.create(title='PHP',desc='about PHP')
+
+>>> Books.objects.create(title='Ruby',desc='about Ruby')
+
+>>> Authors.objects.create(first_name='Jane', last_name = 'Austen')
+
+>>> Authors.objects.create(first_name='Emily', last_name = 'Dickinson')
+
+>>> Authors.objects.create(first_name='Fyodor', last_name = 'Dostoevksy')
+
+>>> Authors.objects.create(first_name='William', last_name = 'Shakespeare')
+
+>>> Authors.objects.create(first_name='Lau', last_name = 'Tzu')
+
+>>> exit()
+
+python manage.py makemigrations
+
+1
+
+""
+
+python manage.py migrate
+
+python manage.py shell
+
+>>> from apps.books_authors_app.models import *
+
+>>> t = Books.objects.get(title="C Sharp")
+
+>>> t.title="C#"
+>>> t.save()
+
+>>> bill = Authors.objects.all()[3]
+>>> bill.first_name="Bill"
+>>> bill.save()
+
+>>> books = Books.objects.all()[:3]
+>>> for book in books:
+...     book.authors.add(Authors.objects.all()[1])
+...     book.save()
+
+>>> books = Books.objects.all()[:4]
+>>> for book in books:
+...     book.authors.add(Authors.objects.all()[3])
+...     book.save()
+
+>>> books = Books.objects.all()[:5]
+>>> for book in books:
+...     book.authors.add(Authors.objects.all()[4])
+...     book.save()
+
+>>> book = Books.objects.get(id = 2)
+>>> book.authors.all()
+>>> bye = book.authors.all()[0]
+>>> book.authors.remove(bye)
+
+>>> book = Books.objects.get(id = 1)
+>>> book.authors.add(Authors.objects.get(id = 4))
+
+>>> auth = Authors.objects.get(id=2)
+>>> auth.books.all()
+
+>>> book = Books.objects.get(id = 4)
+>>> book.authors.all()
